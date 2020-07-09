@@ -92,27 +92,69 @@ function startHeartAnimation() {
 	};
 })(jQuery);
 
-function timeElapse(date){
-	var current = Date();
-	var seconds = (Date.parse(current) - Date.parse(date)) / 1000;
-	var days = Math.floor(seconds / (3600 * 24));
-	seconds = seconds % (3600 * 24);
-	var hours = Math.floor(seconds / 3600);
-	if (hours < 10) {
-		hours = "0" + hours;
-	}
-	seconds = seconds % 3600;
-	var minutes = Math.floor(seconds / 60);
-	if (minutes < 10) {
-		minutes = "0" + minutes;
-	}
-	seconds = seconds % 60;
-	if (seconds < 10) {
-		seconds = "0" + seconds;
-	}
-	var result = "<span class=\"digit\">" + days + "</span> days <span class=\"digit\">" + hours + "</span> hours <span class=\"digit\">" + minutes + "</span> minutes <span class=\"digit\">" + seconds + "</span> seconds"; 
+function timeElapse(date1){
+	// var current = Date();
+	// var seconds = (Date.parse(current) - Date.parse(date)) / 1000;
+	// var days = Math.floor(seconds / (3600 * 24));
+	// seconds = seconds % (3600 * 24);
+	// var hours = Math.floor(seconds / 3600);
+	// if (hours < 10) {
+	// 	hours = "0" + hours;
+	// }
+	// seconds = seconds % 3600;
+	// var minutes = Math.floor(seconds / 60);
+	// if (minutes < 10) {
+	// 	minutes = "0" + minutes;
+	// }
+	// seconds = seconds % 60;
+	// if (seconds < 10) {
+	// 	seconds = "0" + seconds;
+	// }
+
+	var date1= '2020/03/01 12:00:00';  //开始时间
+	var date2 = new Date();    //结束时间
+	var date3 = date2.getTime() - new Date(date1).getTime();   //时间差的毫秒数
+
+	//------------------------------
+
+	//计算出相差天数
+	var days=Math.floor(date3/(24*3600*1000))
+
+	//计算出小时数
+
+	var leave1=date3%(24*3600*1000)    //计算天数后剩余的毫秒数
+	var hours=Math.floor(leave1/(3600*1000))
+	//计算相差分钟数
+	var leave2=leave1%(3600*1000)        //计算小时数后剩余的毫秒数
+	var minutes=Math.floor(leave2/(60*1000))
+	//计算相差秒数
+	var leave3=leave2%(60*1000)      //计算分钟数后剩余的毫秒数
+	var seconds=Math.round(leave3/1000)
+	var result = "<span class=\"digit\">" + days + "</span> days <span class=\"digit\">" + hours + "</span> hours <span class=\"digit\">" + minutes + "</span> minutes <span class=\"digit\">" + seconds + "</span> seconds";
 	$("#elapseClock").html(result);
 }
+// function timeElapse(date){
+// 	var current = Date();
+// 	var seconds = (Date.parse(current) - Date.parse(date)) / 1000;
+// 	var days = Math.floor(seconds / (3600 * 24));
+// 	seconds = seconds % (3600 * 24);
+// 	var hours = Math.floor(seconds / 3600);
+// 	if (hours < 10) {
+// 		hours = "0" + hours;
+// 	}
+// 	seconds = seconds % 3600;
+// 	var minutes = Math.floor(seconds / 60);
+// 	if (minutes < 10) {
+// 		minutes = "0" + minutes;
+// 	}
+// 	seconds = seconds % 60;
+// 	if (seconds < 10) {
+// 		seconds = "0" + seconds;
+// 	}
+//
+// 	var result = "<span class=\"digit\">" + days + "</span> days <span class=\"digit\">" + hours + "</span> hours <span class=\"digit\">" + minutes + "</span> minutes <span class=\"digit\">" + seconds + "</span> seconds";
+// 	$("#elapseClock").html(result);
+// }
 
 function showMessages() {
 	adjustWordsPosition();
